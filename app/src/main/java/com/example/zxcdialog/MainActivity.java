@@ -1,6 +1,5 @@
 package com.example.zxcdialog;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -10,22 +9,29 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.DateFormat;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.zxcdialog.fragments.LvlAlarm1;
+import com.example.zxcdialog.fragments.LvlAlarmFragment;
+import com.example.zxcdialog.fragments.TimePickerFragment;
+
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+    private SharedPreferences pref;
     private TextView mTextView;
+    public static final String save_key = "save_key";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
 
         mTextView = findViewById(R.id.textView);
         Button buttonTimePicker = findViewById(R.id.button_timepicker);
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 cancelAlarm();
             }
         });
+        mTextView.setText(pref.getString(save_key, "пусто"));
     }
 
 
@@ -53,8 +60,15 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE, minute);
         c.set(Calendar.SECOND, 0);
+        DialogFragment lvlAlarm = new LvlAlarmFragment();
+        lvlAlarm.show(getSupportFragmentManager(), "lvlAlarm");
         updateTimeText(c);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putString(save_key, mTextView.getText().toString());
+        edit.apply();
         startAlarm(c);
+        DialogFragment lvl1 = new LvlAlarm1();
+        lvl1.show(getSupportFragmentManager(), "zxc");
     }
 
     @SuppressLint("NewApi")
@@ -78,5 +92,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
         alarmManager.cancel(pendingIntent);
         mTextView.setText("Alarm canceled");
+        SharedPreferences.Editor editCancel = pref.edit();
+        editCancel.putString(save_key, mTextView.getText().toString());
+        editCancel.apply();
+
+    }
+    private void init(){
+        pref = getSharedPreferences( "Test", MODE_PRIVATE);
     }
 }

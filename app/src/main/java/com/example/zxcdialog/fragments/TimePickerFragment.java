@@ -1,4 +1,4 @@
-package com.example.zxcdialog;
+package com.example.zxcdialog.fragments;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;

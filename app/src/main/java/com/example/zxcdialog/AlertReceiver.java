@@ -5,8 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.view.View;
 
 import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.example.zxcdialog.fragments.LvlAlarm1;
 
 public class AlertReceiver extends BroadcastReceiver {
     @Override
@@ -14,6 +19,7 @@ public class AlertReceiver extends BroadcastReceiver {
         NotificationHelper notificationHelper = new NotificationHelper(context);
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
         notificationHelper.getManager().notify(1, nb.build());
+        DialogFragment lvl1 = new LvlAlarm1();
         final Ringtone r = RingtoneManager.getRingtone(context, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
         r.play();
     }
