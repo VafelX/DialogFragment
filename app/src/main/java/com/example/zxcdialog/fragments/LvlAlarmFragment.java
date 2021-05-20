@@ -31,18 +31,12 @@ public class LvlAlarmFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lvl_alarm, container, false);
         textViewLvl = (TextView) view.findViewById(R.id.tv_lvl);
-        btnLvl0 = (AppCompatButton) view.findViewById(R.id.btnLvl0);
         btnLvl1 = (AppCompatButton) view.findViewById(R.id.btnLvl1);
         btnLvl2 = (AppCompatButton) view.findViewById(R.id.btnLvl2);
         btnLvl3 = (AppCompatButton) view.findViewById(R.id.btnLvl3);
         btnNext = (AppCompatButton) view.findViewById(R.id.btn_next);
 
-        btnLvl0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textViewLvl.setText("Вы установли " + String.valueOf(lvlAlarm) + "-ой уровень");
-            }
-        });
+
 
         btnLvl1.setOnClickListener(new View.OnClickListener() {
             @Override
