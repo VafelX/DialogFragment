@@ -84,14 +84,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
         }
-        Intent my_intent = getIntent();
-        boolean workAlarm = my_intent.getBooleanExtra("workAlarm", false);
-        if (workAlarm == false) {
 
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pendingIntent);
-            Intent my_intent12 = getIntent();
-            workAlarm = my_intent.getBooleanExtra("workAlarm", true);
-        }
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pendingIntent);
 
 
     }

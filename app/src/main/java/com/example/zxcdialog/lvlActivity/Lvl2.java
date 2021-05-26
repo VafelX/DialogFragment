@@ -14,45 +14,49 @@ import com.example.zxcdialog.AlertReceiver;
 import com.example.zxcdialog.MainActivity;
 import com.example.zxcdialog.R;
 
-import java.util.Random;
-
-public class Lvl1 extends AppCompatActivity {
-    EditText editText1;
-    AppCompatButton btn_nextPrimer1;
-    TextView multiplication;
+public class Lvl2 extends AppCompatActivity {
+    TextView textView;
+    EditText editText;
+    AppCompatButton appCompatButton;
+    int a;
+    int b;
+    Integer x, y, z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lvl1);
-        editText1 = findViewById(R.id.editText1);
-        multiplication = findViewById(R.id.multiplication);
-        btn_nextPrimer1 = findViewById(R.id.btn_nextPrimer1);
-        int a, b, x, y;
+        setContentView(R.layout.activity_lvl2);
+        textView = findViewById(R.id.primer);
+        editText = findViewById(R.id.editText2);
         Boolean closeAlarm = true;
-        int[] z = new int[]{2,3,4,5,6,7,8,9};
-        Random rand = new Random();
-        a = (int) Math.floor(Math.random() * z.length);
-        b = (int) Math.floor(Math.random() * z.length);
-
-        multiplication.setText(a + " * " + b + " = ?" );
-        btn_nextPrimer1.setOnClickListener(new View.OnClickListener() {
+        x = 100;
+        y = 1000;
+        a = (int) (x + Math.random() * y - x);
+        b = (int) (x + Math.random() * y - x);
+        textView.setText(a + " + " + b + " = ?");
+        appCompatButton = findViewById(R.id.btn_nextPrimer2);
+        appCompatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int x = a * b;
-                int y = Integer.parseInt(editText1.getText().toString());
-                if (x == y){
+                int z = a + b;
+                Log.d("MY_TAG", "btnClick");
+
+                int zxc = Integer.parseInt(editText.getText().toString());
+                if (zxc == z) {
                     Log.d("MY_TAG", "equals");
                     Intent stopAlarm = getIntent();
-                    Intent workAlarmIntent = new Intent(Lvl1.this, MainActivity.class);
+                    Intent workAlarmIntent = new Intent(Lvl2.this, MainActivity.class);
                     workAlarmIntent.putExtra("workAlarm", true);
                     startActivity(workAlarmIntent);
-                    Intent zxczxxczc = new Intent(Lvl1.this, AlertReceiver.class);
+                    Intent zxczxxczc = new Intent(Lvl2.this, AlertReceiver.class);
                     zxczxxczc.putExtra("workAlarmzxc", closeAlarm);
                     sendBroadcast(zxczxxczc);
                     Log.i("psg", "psg");
                 }
+
             }
         });
     }
+
+
 }

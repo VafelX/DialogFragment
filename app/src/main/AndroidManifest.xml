@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ZxcDialog">
         <activity android:name=".lvlActivity.Lvl1"></activity>
+        <activity android:name=".lvlActivity.Lvl2" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

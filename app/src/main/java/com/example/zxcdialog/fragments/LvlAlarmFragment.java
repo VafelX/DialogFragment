@@ -1,6 +1,9 @@
 package com.example.zxcdialog.fragments;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,20 +13,23 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.zxcdialog.MainActivity;
+import com.example.zxcdialog.NotificationHelper;
 import com.example.zxcdialog.R;
 
 
 public class LvlAlarmFragment extends DialogFragment {
 
-    public int lvlAlarm = 0;
     AppCompatButton btnLvl0, btnLvl1, btnLvl2, btnLvl3, btnNext;
     TextView textViewLvl;
+    public int lvlAlarmint;
 
 
     @Override
@@ -41,24 +47,24 @@ public class LvlAlarmFragment extends DialogFragment {
         btnLvl1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lvlAlarm = 1;
-                textViewLvl.setText("Вы установли " + String.valueOf(lvlAlarm) + "-ый уровень");
+                lvlAlarmint = 1;
+                textViewLvl.setText("Вы установли " + String.valueOf(lvlAlarmint) + "-ый уровень");
             }
         });
 
         btnLvl2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lvlAlarm = 2;
-                textViewLvl.setText("Вы установли " + String.valueOf(lvlAlarm) + "-ой уровень");
+                lvlAlarmint = 2;
+                textViewLvl.setText("Вы установли " + String.valueOf(lvlAlarmint) + "-ой уровень");
             }
         });
 
         btnLvl3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lvlAlarm = 3;
-                textViewLvl.setText("Вы установли " + String.valueOf(lvlAlarm) + "-ий уровень");
+                lvlAlarmint = 3;
+                textViewLvl.setText("Вы установли " + String.valueOf(lvlAlarmint) + "-ий уровень");
             }
         });
 
@@ -70,6 +76,12 @@ public class LvlAlarmFragment extends DialogFragment {
                         .beginTransaction()
                         .remove(LvlAlarmFragment.this)
                         .commit();
+                /*Intent lvlAlarm = new Intent(getActivity(), NotificationHelper.class);
+                Log.i("new Intent", "new Intent");
+                lvlAlarm.putExtra("lvlAlarm", lvlAlarmint);
+                Log.i("putExtra", "putExtra");
+                getContext().startActivity(lvlAlarm);
+                Log.i("startActivity", "startActivity");*/
             }
         });
 

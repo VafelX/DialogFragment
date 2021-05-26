@@ -8,10 +8,13 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 
 import androidx.core.app.NotificationCompat;
 
+import com.example.zxcdialog.fragments.LvlAlarmFragment;
 import com.example.zxcdialog.lvlActivity.Lvl1;
+import com.example.zxcdialog.lvlActivity.Lvl2;
 
 public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
@@ -41,6 +44,9 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification() {
+        /*Intent intent = new Intent(getApplicationContext(), LvlAlarmFragment.class);
+        Bundle lvlBundle = intent.getExtras();
+        int lvlAlarm = lvlBundle.getInt("lvlAlarm");*/
         Intent resultIntent = new Intent(this, Lvl1.class);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
