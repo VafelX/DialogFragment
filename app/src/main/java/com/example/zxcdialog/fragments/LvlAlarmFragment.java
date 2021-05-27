@@ -9,10 +9,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.zxcdialog.AlertReceiver;
 import com.example.zxcdialog.MainActivity;
 import com.example.zxcdialog.NotificationHelper;
 import com.example.zxcdialog.R;
@@ -76,16 +79,21 @@ public class LvlAlarmFragment extends DialogFragment {
                         .beginTransaction()
                         .remove(LvlAlarmFragment.this)
                         .commit();
-                /*Intent lvlAlarm = new Intent(getActivity(), NotificationHelper.class);
+                /*Intent lvlAlarm = new Intent(LvlAlarmFragment.this.getActivity(), AlertReceiver.class);
                 Log.i("new Intent", "new Intent");
                 lvlAlarm.putExtra("lvlAlarm", lvlAlarmint);
                 Log.i("putExtra", "putExtra");
-                getContext().startActivity(lvlAlarm);
+                getActivity().sendBroadcast(lvlAlarm);
                 Log.i("startActivity", "startActivity");*/
             }
         });
 
 
         return view;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
     }
 }

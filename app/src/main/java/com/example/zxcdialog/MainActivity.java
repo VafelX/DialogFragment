@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 cancelAlarm();
             }
         });
-        mTextView.setText(pref.getString(save_key, "пусто"));
+        mTextView.setText(pref.getString(save_key, "No alarm"));
     }
 
 

@@ -44,9 +44,6 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification() {
-        /*Intent intent = new Intent(getApplicationContext(), LvlAlarmFragment.class);
-        Bundle lvlBundle = intent.getExtras();
-        int lvlAlarm = lvlBundle.getInt("lvlAlarm");*/
         Intent resultIntent = new Intent(this, Lvl1.class);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
