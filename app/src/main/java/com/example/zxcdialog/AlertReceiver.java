@@ -52,10 +52,15 @@ public class AlertReceiver extends BroadcastReceiver {
         int LVL = zxcGhoul;
         if (def == 0) {
             wrk = workAlarm.getInt("wrk", 0);
+
             if (wrk == 3) {
                 def = 1;
             }
         }
+        int countLvl;
+        int lvlAlarm = workAlarm.getInt("LVL", 0);
+
+
         Log.i("def", String.valueOf(def));
 
 
@@ -79,20 +84,21 @@ public class AlertReceiver extends BroadcastReceiver {
 
         }
         if (def == 1) {
-            int lvlAlarm = workAlarm.getInt("LVL", 1);
             Log.i("hello", String.valueOf(lvlAlarm));
-
-            if (lvlAlarm == 1) {
+            int a = 1;
+            int b = 3;
+            countLvl = a + (int) (Math.random() * b);
+            if (countLvl == 1) {
                 NotificationHelper1 notificationHelper = new NotificationHelper1(context);
                 NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
                 notificationHelper.getManager().notify(1, nb.build());
             }
-            if (lvlAlarm == 2) {
+            if (countLvl == 2) {
                 NotificationHelper2 notificationHelper2 = new NotificationHelper2(context);
                 NotificationCompat.Builder nb = notificationHelper2.getChannelNotification();
                 notificationHelper2.getManager().notify(2, nb.build());
             }
-            if (lvlAlarm == 3) {
+            if (countLvl == 3) {
                 NotificationHelper3 notificationHelper3 = new NotificationHelper3(context);
                 NotificationCompat.Builder nb = notificationHelper3.getChannelNotification();
                 notificationHelper3.getManager().notify(3, nb.build());
