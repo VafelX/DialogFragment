@@ -79,9 +79,9 @@ public class AlertReceiver extends BroadcastReceiver {
 
         }
         if (def == 1) {
-            int lvlAlarm = workAlarm.getInt("hello");
+            int lvlAlarm = workAlarm.getInt("LVL", 1);
             Log.i("hello", String.valueOf(lvlAlarm));
-            Log.i("lvlvan", String.valueOf(lvlAlarm));
+
             if (lvlAlarm == 1) {
                 NotificationHelper1 notificationHelper = new NotificationHelper1(context);
                 NotificationCompat.Builder nb = notificationHelper.getChannelNotification();

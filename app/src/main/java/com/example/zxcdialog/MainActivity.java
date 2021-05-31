@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         if (mInput > 0){
             int zbvddd = mInput;
             Intent intent = new Intent(MainActivity.this, AlertReceiver.class);
-            intent.putExtra("LVL", input);
+            intent.putExtra("LVL", mInput);
             Log.i("lvl", String.valueOf(input));
             sendBroadcast(intent);
             Log.i("mInput", "minput = " + mInput);

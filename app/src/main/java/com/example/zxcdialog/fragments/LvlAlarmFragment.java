@@ -93,8 +93,9 @@ public class LvlAlarmFragment extends DialogFragment {
 
             }
         });
-
-
+        Intent lvlAlarm = new Intent(getActivity(), AlertReceiver.class);
+        lvlAlarm.putExtra("hello", lvlAlarmInt);
+        getActivity().sendBroadcast(lvlAlarm);
         return view;
     }
 
