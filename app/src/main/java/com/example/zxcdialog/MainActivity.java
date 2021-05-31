@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.DateFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,18 +23,35 @@ import com.example.zxcdialog.fragments.TimePickerFragment;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, LvlAlarmFragment.OnInputListener {
     private SharedPreferences pref;
     private TextView mTextView;
     Boolean aBoolean;
     public static final String save_key = "save_key";
     int ALARM_TYPE = AlarmManager.RTC_WAKEUP;
+    private static final String TAG = "MainActivity";
+    public Integer mInput;
+
+    @Override
+    public void sendInput(Integer input) {
+        Log.d(TAG, "sendInput: got the input: " + input);
+        mInput = input;
+        if (mInput > 0){
+            int zbvddd = mInput;
+            Intent intent = new Intent(MainActivity.this, AlertReceiver.class);
+            intent.putExtra("LVL", input);
+            Log.i("lvl", String.valueOf(input));
+            sendBroadcast(intent);
+            Log.i("mInput", "minput = " + mInput);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+
 
         mTextView = findViewById(R.id.textView);
         Button buttonTimePicker = findViewById(R.id.button_timepicker);
@@ -78,15 +96,16 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     private void startAlarm(Calendar c) {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-        if (c.before(Calendar.getInstance())) {
-            c.add(Calendar.DATE, 1);
-        }
-
-
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pendingIntent);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(this, AlertReceiver.class);
+            Integer workAlarm = 3;
+            intent.putExtra("wrk", workAlarm);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+            if (c.before(Calendar.getInstance())) {
+                c.add(Calendar.DATE, 1);
+            }
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+            Log.i("wrk", String.valueOf(workAlarm));
 
 
     }
@@ -106,4 +125,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private void init() {
         pref = getSharedPreferences("Test", MODE_PRIVATE);
     }
+
+
 }
